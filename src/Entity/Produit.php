@@ -31,15 +31,15 @@ class Produit
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0', nullable: true)]
     private ?string $reduction = null;
 
-    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Fournisseur::class)]
-    private Collection $fournisseur;
+    #[ORM\ManyToMany(mappedBy: 'produits', targetEntity: Fournisseur::class)]
+    private Collection $fournisseurs;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     private ?Categorie $categories = null;
 
     public function __construct()
     {
-        $this->fournisseur = new ArrayCollection();
+        $this->fournisseurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,16 +110,16 @@ class Produit
     /**
      * @return Collection<int, Fournisseur>
      */
-    public function getFournisseur(): Collection
+    public function getFournisseurs(): Collection
     {
-        return $this->fournisseur;
+        return $this->fournisseurs;
     }
 
     public function addFournisseur(Fournisseur $fournisseur): static
     {
-        if (!$this->fournisseur->contains($fournisseur)) {
-            $this->fournisseur->add($fournisseur);
-            $fournisseur->setProduit($this);
+        if (!$this->fournisseurs->contains($fournisseur)) {
+            $this->fournisseurs->add($fournisseur);
+            $fournisseur->addProduit($this);
         }
 
         return $this;
@@ -127,11 +127,8 @@ class Produit
 
     public function removeFournisseur(Fournisseur $fournisseur): static
     {
-        if ($this->fournisseur->removeElement($fournisseur)) {
-            // set the owning side to null (unless already changed)
-            if ($fournisseur->getProduit() === $this) {
-                $fournisseur->setProduit(null);
-            }
+        if ($this->fournisseurs->removeElement($fournisseur)) {
+            $fournisseur->removeProduit($this);
         }
 
         return $this;
@@ -139,12 +136,12 @@ class Produit
 
     public function getCategories(): ?Categorie
     {
-        return $this->cattegorie;
+        return $this->categories;
     }
 
-    public function setCategories(?Categorie $cattegorie): static
+    public function setCategories(?Categorie $categories): static
     {
-        $this->cattegorie = $cattegorie;
+        $this->categories = $categories;
 
         return $this;
     }
