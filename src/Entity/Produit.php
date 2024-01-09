@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
@@ -22,24 +21,28 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $libelle_long = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '2', nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private ?string $prix = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $stock = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0', nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 0, nullable: true)]
     private ?string $reduction = null;
 
     #[ORM\ManyToMany(mappedBy: 'produits', targetEntity: Fournisseur::class)]
     private Collection $fournisseurs;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
-    private ?Categorie $categories = null;
+    private ?Categorie $categorie = null;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Contient::class, cascade: ['persist', 'remove'])]
+    private Collection $contenus;
 
     public function __construct()
     {
         $this->fournisseurs = new ArrayCollection();
+        $this->contenus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,12 +139,39 @@ class Produit
 
     public function getCategories(): ?Categorie
     {
-        return $this->categories;
+        return $this->categorie;
     }
 
-    public function setCategories(?Categorie $categories): static
+    public function setCategories(?Categorie $categorie): static
     {
-        $this->categories = $categories;
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contient>
+     */
+    public function getContenus(): Collection
+    {
+        return $this->contenus;
+    }
+
+    public function addContenu(Contient $contenu): static
+    {
+        if (!$this->contenus->contains($contenu)) {
+            $this->contenus->add($contenu);
+            $contenu->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContenu(Contient $contenu): static
+    {
+        if ($this->contenus->removeElement($contenu)) {
+            $contenu->setProduit(null);
+        }
 
         return $this;
     }
