@@ -45,11 +45,50 @@ class Jeu1 extends Fixture
         $categorie1->setDescription('Piano de type haut');
         $manager->persist($categorie1);
 
+
+        // Ajout de sous-catégories
         $sousCategorie1 = new Categorie();
         $sousCategorie1->setNom('Piano haut rouge');
         $sousCategorie1->setDescription('rouge de ouf');
         $sousCategorie1->setSousCategorie($categorie1);
         $manager->persist($sousCategorie1);
+
+        $categorie2 = new Categorie();
+        $categorie2->setNom('Basse');
+        $categorie2->setDescription('Wah basse');
+        $manager->persist($categorie2);
+
+        $categorie3 = new Categorie();
+        $categorie3->setNom('Guitar electrique');
+        $categorie3->setDescription('Guitar de fou');
+        $manager->persist($categorie3);
+
+        $categorie4 = new Categorie();
+        $categorie4->setNom('Synthétique');
+        $categorie4->setDescription('synth');
+        $manager->persist($categorie4);
+
+        $categorie5 = new Categorie();
+        $categorie5->setNom('VST');
+        $categorie5->setDescription('Bon VST');
+        $manager->persist($categorie5);
+
+        $categorie6 = new Categorie();
+        $categorie6->setNom('MAO');
+        $categorie6->setDescription('Logiciel de compo');
+        $manager->persist($categorie6);
+
+        $categorie7 = new Categorie();
+        $categorie7->setNom('Micro');
+        $categorie7->setDescription('microphone');
+        $manager->persist($categorie7);
+
+        $categorie8 = new Categorie();
+        $categorie8->setNom('Enceintes');
+        $categorie8->setDescription('Monitoring');
+        $manager->persist($categorie8);
+
+
 
         $produit1 = new Produit();
         $produit1->setLibelleCourt("Noire pure");
