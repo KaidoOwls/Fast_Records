@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+// HomeController.php
+
 use App\Entity\Categorie;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,10 +29,15 @@ class HomeController extends AbstractController
     }
 
     #[Route('/categorie/{categorie}', name: 'app_categorie')]
-public function categorie(Categorie $categorie): Response
-{
-    return $this->render('home/categorie.html.twig', [
-        'categorie' => $categorie
-    ]);
+    public function categorie(Categorie $categorie, CategorieRepository $catrepo): Response
+    {
+        // Récupérer les sous-catégories de la catégorie choisie
+        $sousCategories = $catrepo->findBy(['sous_categorie' => $categorie]);
+
+        return $this->render('home/categorie.html.twig', [
+            'categorie' => $categorie,
+            'sousCategories' => $sousCategories,
+        ]);
+    }
 }
-}
+

@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ categorie.nom }}</h5>
                             <p class="card-text">{{ categorie.description }}</p>
-                            <a href="#!" class="btn btn-primary" data-mdb-ripple-init>Button</a>
+                            <a href="{{ path("app_categorie", { categorie: categorie.id}) }}" class="btn btn-primary" data-mdb-ripple-init>Button</a>
                         </div>
                     </div>
                 </div>

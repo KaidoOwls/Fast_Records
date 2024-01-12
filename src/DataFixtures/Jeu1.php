@@ -53,15 +53,85 @@ class Jeu1 extends Fixture
         $sousCategorie1->setSousCategorie($categorie1);
         $manager->persist($sousCategorie1);
 
+        $sousCategorie2 = new Categorie();
+        $sousCategorie2->setNom('Piano haut noir');
+        $sousCategorie2->setDescription('noir élégant');
+        $sousCategorie2->setSousCategorie($categorie1);
+        $manager->persist($sousCategorie2);
+
+        $sousCategorie3 = new Categorie();
+        $sousCategorie3->setNom('Piano haut blanc');
+        $sousCategorie3->setDescription('blanc classique');
+        $sousCategorie3->setSousCategorie($categorie1);
+        $manager->persist($sousCategorie3);
+
+        $sousCategorie4 = new Categorie();
+        $sousCategorie4->setNom('Piano haut bleu');
+        $sousCategorie4->setDescription('bleu apaisant');
+        $sousCategorie4->setSousCategorie($categorie1);
+        $manager->persist($sousCategorie4);
+
         $categorie2 = new Categorie();
         $categorie2->setNom('Basse');
         $categorie2->setDescription('Wah basse');
         $manager->persist($categorie2);
 
+
+        $sousCategorie2_1 = new Categorie();
+        $sousCategorie2_1->setNom('Basse 4 cordes');
+        $sousCategorie2_1->setDescription('Pour les amateurs de 4 cordes');
+        $sousCategorie2_1->setSousCategorie($categorie2);
+        $manager->persist($sousCategorie2_1);
+
+        $sousCategorie2_2 = new Categorie();
+        $sousCategorie2_2->setNom('Basse 5 cordes');
+        $sousCategorie2_2->setDescription('Pour les amateurs de 5 cordes');
+        $sousCategorie2_2->setSousCategorie($categorie2);
+        $manager->persist($sousCategorie2_2);
+
+        $sousCategorie2_3 = new Categorie();
+        $sousCategorie2_3->setNom('Basse fretless');
+        $sousCategorie2_3->setDescription('Pour les amateurs de fretless');
+        $sousCategorie2_3->setSousCategorie($categorie2);
+        $manager->persist($sousCategorie2_3);
+
+        $sousCategorie2_4 = new Categorie();
+        $sousCategorie2_4->setNom('Basse acoustique');
+        $sousCategorie2_4->setDescription('Pour les amateurs de basses acoustiques');
+        $sousCategorie2_4->setSousCategorie($categorie2);
+        $manager->persist($sousCategorie2_4);
+
+
         $categorie3 = new Categorie();
         $categorie3->setNom('Guitar electrique');
         $categorie3->setDescription('Guitar de fou');
         $manager->persist($categorie3);
+
+
+        $sousCategorie3_1 = new Categorie();
+        $sousCategorie3_1->setNom('Guitar Les Paul');
+        $sousCategorie3_1->setDescription('Pour les amateurs de Les Paul');
+        $sousCategorie3_1->setSousCategorie($categorie3);
+        $manager->persist($sousCategorie3_1);
+
+        $sousCategorie3_2 = new Categorie();
+        $sousCategorie3_2->setNom('Guitar Stratocaster');
+        $sousCategorie3_2->setDescription('Pour les amateurs de Stratocaster');
+        $sousCategorie3_2->setSousCategorie($categorie3);
+        $manager->persist($sousCategorie3_2);
+
+        $sousCategorie3_3 = new Categorie();
+        $sousCategorie3_3->setNom('Guitar Telecaster');
+        $sousCategorie3_3->setDescription('Pour les amateurs de Telecaster');
+        $sousCategorie3_3->setSousCategorie($categorie3);
+        $manager->persist($sousCategorie3_3);
+
+        $sousCategorie3_4 = new Categorie();
+        $sousCategorie3_4->setNom('Guitar hollow body');
+        $sousCategorie3_4->setDescription('Pour les amateurs de guitares hollow body');
+        $sousCategorie3_4->setSousCategorie($categorie3);
+        $manager->persist($sousCategorie3_4);
+
 
         $categorie4 = new Categorie();
         $categorie4->setNom('Synthétique');
