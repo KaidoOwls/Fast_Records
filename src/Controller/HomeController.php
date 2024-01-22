@@ -5,7 +5,9 @@ namespace App\Controller;
 // HomeController.php
 
 use App\Entity\Categorie;
+use App\Entity\Produit;
 use App\Repository\CategorieRepository;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,5 +41,15 @@ class HomeController extends AbstractController
             'sousCategories' => $sousCategories,
         ]);
     }
-}
+    #[Route('/produits/{categorie}', name: 'app_produits')]
+    public function produits(Categorie $categorie, ProduitRepository $produitRepository): Response
+    {
+        $produits = $produitRepository->findBy(['categorie' => $categorie]);
 
+        return $this->render('catalogue/produits.html.twig', [
+            'produits' => $produits,
+            'categorie' => $categorie, // Ajoutez cette ligne pour définir la variable 'categorie'
+        ]);
+    }
+
+}

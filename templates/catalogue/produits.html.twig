@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container position-absolute top-50 start-50 translate-middle" style="background-color: transparent; z-index: 1;">
+        <div class="row">
+            {# Afficher les produits #}
+            {% for produit in produits %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                            <img src="{{ asset('path/to/your/image.jpg') }}" class="img-fluid"/>
+                            <a href="#!">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.getLibelleCourt() }}</h5>
+                            <p class="card-text">{{ produit.getPrix() }} €</p>
+                            <p class="card-text">Stock: {{ produit.getStock() }}</p>
+                            {# Ajoutez d'autres informations sur le produit que vous souhaitez afficher #}
+                            <a href="#!" class="btn btn-primary" data-mdb-ripple-init>Button</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
