@@ -6,19 +6,27 @@
         <div class="row">
             {% for categorie in categories %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid"/>
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                            </a>
+                    <a href="{{ path("app_categorie", { categorie: categorie.id}) }}" >
+
+                        <div class="card mx-auto" style="width: 18rem;">
+                            <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid"/>
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ path("app_categorie", { categorie: categorie.id}) }}" >
+
+                                <h5 class="card-title">{{ categorie.nom }}</h5>
+                                <p class="card-text">{{ categorie.description }}</p>
+                                <a href="{{ path("app_categorie", { categorie: categorie.id}) }}" class="btn btn-primary" data-mdb-ripple-init>Button</a>
+                                </a>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ categorie.nom }}</h5>
-                            <p class="card-text">{{ categorie.description }}</p>
-                            <a href="{{ path("app_categorie", { categorie: categorie.id}) }}" class="btn btn-primary" data-mdb-ripple-init>Button</a>
-                        </div>
-                    </div>
+
+                    </a>
+
                 </div>
             {% endfor %}
         </div>

@@ -46,9 +46,22 @@ class HomeController extends AbstractController
     {
         $produits = $produitRepository->findBy(['categorie' => $categorie]);
 
+
         return $this->render('catalogue/produits.html.twig', [
             'produits' => $produits,
             'categorie' => $categorie, // Ajoutez cette ligne pour définir la variable 'categorie'
+
+
+        ]);
+    }
+
+    #[Route('/produit/{produit}', name: 'app_produit')]
+    public function produit(Produit $produit): Response
+    {
+        // dd($categorie);
+
+        return $this->render('catalogue/produit.html.twig', [
+            'produit' => $produit
         ]);
     }
 
