@@ -35,18 +35,12 @@
             </div>
         {% endif %}
         <!-- Background image -->
-        <div
-                class="bg-image d-flex justify-content-center align-items-center"
-                style="
-            background-image: url('https://images.squarespace-cdn.com/content/v1/63332c7711f11c2fedb33a99/4c3b6d4d-544f-42a7-81c7-94176d67b085/dolby+atmos.jpg');
-            height: 100vh;
-            "
-        >
 
-        </div>
         <!-- Background image -->
         {% block body %}
 
         {% endblock %}
     </body>
+    {% include "_partials/_footer.html.twig" %}
+
 </html>
