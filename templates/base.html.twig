@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Accueil{% endblock %} - Fast records </title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Accueil{% endblock %} - Fast records </title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- feuilles de styles -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        {% block stylesheets %}{% endblock %}
+    <!-- feuilles de styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
 
+{% include "_partials/_nav.html.twig" %}
+{% if app.user and app.user.isVerified == false %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert-message">
+            <strong>Votre compte n'est pas activé</strong>,
+                                <a href="{{ path('app_resend_verification_email')}}">renvoyez le lien d'activation</a>
+        </div>
+    </div>
+{% endif %}
 
-        <!--fichier js-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- Background image -->
+{% block body %}
 
-        {% block javascripts %}
-            <script src="{{asset('assets/js/script.js')}}"defer></script>
+{% endblock %}
 
-        {% endblock %}
+{% include "_partials/_footer.html.twig" %}
 
+<!--fichier js-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    </head>
+{% block javascripts %}
+    <script src="{{asset('assets/js/script.js')}}"defer></script>
+{% endblock %}
 
-    <body>
-
-        {% include "_partials/_nav.html.twig" %}
-        {% if app.user and app.user.isVerified == false %}
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <div class="alert-message">
-                    <strong>Votre compte n'est pas activé</strong>,
-{#                    <a href="{{ path('resend_verif')}}">renvoyez le lien d'activation</a>#}
-                </div>
-            </div>
-        {% endif %}
-        <!-- Background image -->
-
-        <!-- Background image -->
-        {% block body %}
-
-        {% endblock %}
-    </body>
-    {% include "_partials/_footer.html.twig" %}
-
+</body>
 </html>

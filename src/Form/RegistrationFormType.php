@@ -19,6 +19,17 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+
+            ->add('telephone', TextType::class)
+            ->add('cp', TextType::class)
+            ->add('adresse', TextType::class)
+            ->add('ville', TextType::class)
+            ->add('type', TextType::class)
+            ->add('coefficient', TextType::class)
+            ->add('adresseLivraison', TextType::class)
+            ->add('adresseFacturation', TextType::class)
             ->add('email', EmailType::class)
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
@@ -34,16 +45,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('telephone', TextType::class)
-            ->add('cp', TextType::class)
-            ->add('adresse', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('type', TextType::class)
-            ->add('coefficient', TextType::class)
-            ->add('adresseLivraison', TextType::class)
-            ->add('adresseFacturation', TextType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
