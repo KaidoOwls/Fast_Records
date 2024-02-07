@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Entity\Produit;
+use App\Services\Panier;
 use App\Repository\CategorieRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,6 +65,15 @@ class HomeController extends AbstractController
         return $this->render('catalogue/produit.html.twig', [
             'produit' => $produit
         ]);
+    }
+
+    public function panier(Panier $service_panier): Response
+    {
+
+        return $this->render(
+            'catalogue/panier_quantite.html.twig',
+            ['quantite' => $service_panier->quantite()]
+        );
     }
 
 }

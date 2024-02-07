@@ -16,10 +16,10 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $libelle_court = null;
+    private ?string $libelle = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $libelle_long = null;
+    private ?string $description = null;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private ?string $prix = null;
@@ -30,10 +30,10 @@ class Produit
     #[ORM\Column(type: 'decimal', precision: 10, scale: 0, nullable: true)]
     private ?string $reduction = null;
 
-    #[ORM\ManyToMany(mappedBy: 'produits', targetEntity: Fournisseur::class)]
-    private Collection $fournisseurs;
+    #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'produits')]
+    private ?Fournisseur $fournisseur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'produits')]
     private ?Categorie $categorie = null;
 
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Contient::class, cascade: ['persist', 'remove'])]
@@ -41,7 +41,6 @@ class Produit
 
     public function __construct()
     {
-        $this->fournisseurs = new ArrayCollection();
         $this->contenus = new ArrayCollection();
     }
 
@@ -50,26 +49,26 @@ class Produit
         return $this->id;
     }
 
-    public function getLibelleCourt(): ?string
+    public function getLibelle(): ?string
     {
-        return $this->libelle_court;
+        return $this->libelle;
     }
 
-    public function setLibelleCourt(?string $libelle_court): static
+    public function setLibelle(?string $libelle): self
     {
-        $this->libelle_court = $libelle_court;
+        $this->libelle = $libelle;
 
         return $this;
     }
 
-    public function getLibelleLong(): ?string
+    public function getDescription(): ?string
     {
-        return $this->libelle_long;
+        return $this->description;
     }
 
-    public function setLibelleLong(?string $libelle_long): static
+    public function setDescription(?string $description): self
     {
-        $this->libelle_long = $libelle_long;
+        $this->description = $description;
 
         return $this;
     }
@@ -79,7 +78,7 @@ class Produit
         return $this->prix;
     }
 
-    public function setPrix(?string $prix): static
+    public function setPrix(?string $prix): self
     {
         $this->prix = $prix;
 
@@ -91,7 +90,7 @@ class Produit
         return $this->stock;
     }
 
-    public function setStock(?int $stock): static
+    public function setStock(?int $stock): self
     {
         $this->stock = $stock;
 
@@ -103,46 +102,31 @@ class Produit
         return $this->reduction;
     }
 
-    public function setReduction(?string $reduction): static
+    public function setReduction(?string $reduction): self
     {
         $this->reduction = $reduction;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Fournisseur>
-     */
-    public function getFournisseurs(): Collection
+    public function getFournisseur(): ?Fournisseur
     {
-        return $this->fournisseurs;
+        return $this->fournisseur;
     }
 
-    public function addFournisseur(Fournisseur $fournisseur): static
+    public function setFournisseur(?Fournisseur $fournisseur): self
     {
-        if (!$this->fournisseurs->contains($fournisseur)) {
-            $this->fournisseurs->add($fournisseur);
-            $fournisseur->addProduit($this);
-        }
+        $this->fournisseur = $fournisseur;
 
         return $this;
     }
 
-    public function removeFournisseur(Fournisseur $fournisseur): static
-    {
-        if ($this->fournisseurs->removeElement($fournisseur)) {
-            $fournisseur->removeProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function getCategories(): ?Categorie
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategories(?Categorie $categorie): static
+    public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
 
@@ -157,7 +141,7 @@ class Produit
         return $this->contenus;
     }
 
-    public function addContenu(Contient $contenu): static
+    public function addContenu(Contient $contenu): self
     {
         if (!$this->contenus->contains($contenu)) {
             $this->contenus->add($contenu);
@@ -167,10 +151,13 @@ class Produit
         return $this;
     }
 
-    public function removeContenu(Contient $contenu): static
+    public function removeContenu(Contient $contenu): self
     {
         if ($this->contenus->removeElement($contenu)) {
-            $contenu->setProduit(null);
+            // set the owning side to null (unless already changed)
+            if ($contenu->getProduit() === $this) {
+                $contenu->setProduit(null);
+            }
         }
 
         return $this;

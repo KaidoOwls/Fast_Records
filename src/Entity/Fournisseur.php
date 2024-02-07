@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FournisseurRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection; // Ajout de cette ligne
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
@@ -45,7 +45,7 @@ class Fournisseur
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -57,7 +57,7 @@ class Fournisseur
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): static
+    public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
 
@@ -69,7 +69,7 @@ class Fournisseur
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): static
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -81,7 +81,7 @@ class Fournisseur
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -96,17 +96,17 @@ class Fournisseur
         return $this->produits;
     }
 
-    public function addProduit(Produit $produit): static
+    public function addProduit(Produit $produit): self
     {
         if (!$this->produits->contains($produit)) {
-            $this->produits->add($produit);
+            $this->produits[] = $produit;
             $produit->setFournisseur($this);
         }
 
         return $this;
     }
 
-    public function removeProduit(Produit $produit): static
+    public function removeProduit(Produit $produit): self
     {
         if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)

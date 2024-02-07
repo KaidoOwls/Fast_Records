@@ -287,12 +287,13 @@ class Jeu1 extends Fixture
 // Produits pour la sous-catégorie 1.1 de la catégorie 1 (Piano haut rouge)
         for ($i = 1; $i <= 4; $i++) {
             $produit1_1 = new Produit();
-            $produit1_1->setLibelleCourt("Produit Piano haut rouge $i");
-            $produit1_1->setLibelleLong("Produit Piano haut rouge - Description $i");
+            $produit1_1->setLibelle(" Piano haut rouge $i");
+            $produit1_1->setDescription(" Piano haut rouge - Description $i");
             $produit1_1->setPrix(29.99 * $i);
             $produit1_1->setStock(8);
             $produit1_1->setReduction(7 * $i);
-            $produit1_1->setCategories($sousCategorie1_1);
+            $produit1_1->setCategorie($sousCategorie1_1);
+            $produit1_1->setFournisseur($four1);
             $manager->persist($produit1_1);
         }
 
