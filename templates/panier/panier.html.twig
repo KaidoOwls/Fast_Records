@@ -9,6 +9,9 @@
         {% if panier is empty %}
             <p>Votre panier est vide.</p>
         {% else %}
+            <!-- Bouton pour vider le panier -->
+            <a href="{{ path('app_panier_delete_all') }}" class="btn btn-danger mb-4">Vider le panier</a>
+
             <div class="row">
                 <div class="col-12">
                     <table class="table">
@@ -18,12 +21,12 @@
                             <th scope="col">Quantité</th>
                             <th scope="col">Prix unitaire</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% set total = 0 %}
                         {% for item in panier %}
-                            {% dump(item) %}
                             {% set subtotal = item.produit.prix * item.quantite %}
                             {% set total = total + subtotal %}
                             <tr>
@@ -31,6 +34,11 @@
                                 <td>{{ item.quantite }}</td>
                                 <td>{{ item.produit.prix }} €</td>
                                 <td>{{ subtotal }} €</td>
+                                <td>
+                                    <a href="{{ path('app_panier_add', { produit: item.produit.id }) }}" class="btn btn-success">+</a>
+                                    <a href="{{ path('app_panier_remove', { produit: item.produit.id }) }}" class="btn btn-warning">-</a>
+                                    <a href="{{ path('app_panier_delete', { produit: item.produit.id }) }}" class="btn btn-danger">x</a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -38,9 +46,15 @@
                         <tr>
                             <td colspan="3" class="text-right"><strong>Total :</strong></td>
                             <td>{{ total }} €</td>
+                            <td></td>
                         </tr>
                         </tfoot>
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a href="{{ path('valider_commande') }}" class="btn btn-primary">Valider la commande</a>
                 </div>
             </div>
         {% endif %}

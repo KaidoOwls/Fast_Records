@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Finalisation de la commande{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="my-4">Finalisation de la commande</h1>
+                <p>Merci de finaliser votre commande.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Contenu de la commande :</h5>
+                        <ul class="list-group">
+                            {% for item in panier %}
+                                <li class="list-group-item">
+                                    {{ item.produit.libelle }} - Quantité: {{ item.quantite }}
+                                    <span class="badge badge-success badge-pill">{{ item.produit.prix }} €</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Récapitulatif de la commande :</h5>
+                        <p>Total : <span style="color: black;" class="badge badge-warning">{{ total }} €</span></p>
+                        <form action="{{ path('finaliser_commande') }}" method="post">
+                            <button type="submit" class="btn btn-primary btn-block">Finaliser la commande</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

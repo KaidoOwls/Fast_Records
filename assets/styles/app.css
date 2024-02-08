@@ -1,6 +1,17 @@
 body {
     background-color: skyblue;
 }
+/* CSS pour le footer */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* Choisissez votre couleur de fond */
+    color: #6c757d; /* Choisissez votre couleur de texte */
+    text-align: center;
+    padding: 20px 0; /* Ajoutez un espacement intérieur pour le contenu du footer */
+}
 
 
 

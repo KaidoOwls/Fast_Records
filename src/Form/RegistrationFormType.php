@@ -21,7 +21,6 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
-
             ->add('telephone', TextType::class)
             ->add('cp', TextType::class)
             ->add('adresse', TextType::class)

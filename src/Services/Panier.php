@@ -16,30 +16,63 @@ class Panier {
     public function add(Produit $produit) {
 
         $panier = $this->session->get("panier", []);
-        // dd($panier);
 
         $trouve = -1;
         foreach($panier as $i => $p) {
-            if( $p["produit"]->getId() == $produit->getId()) {
+            if ($p["produit"]->getId() == $produit->getId()) {
                 $trouve = $i;
             }
         }
 
-        if ($trouve==-1) {
+        if ($trouve == -1) {
             $panier[] = [
                 'produit' => $produit,
                 'quantite' => 1
             ];
-        }
-        else {
+        } else {
             $panier[$trouve]["quantite"]++;
         }
-
-
 
         $this->session->set("panier", $panier);
 
         return $panier;
+    }
+
+    public function remove(Produit $produit) {
+
+        $panier = $this->session->get("panier", []);
+
+        foreach ($panier as $i => $p) {
+            if ($p["produit"]->getId() == $produit->getId()) {
+                $panier[$i]["quantite"]--;
+                if ($panier[$i]["quantite"] <= 0) {
+                    unset($panier[$i]);
+                }
+            }
+        }
+
+        $this->session->set("panier", $panier);
+
+        return $panier;
+    }
+
+    public function delete(Produit $produit) {
+
+        $panier = $this->session->get("panier", []);
+
+        foreach ($panier as $i => $p) {
+            if ($p["produit"]->getId() == $produit->getId()) {
+                unset($panier[$i]);
+            }
+        }
+
+        $this->session->set("panier", $panier);
+
+        return $panier;
+    }
+
+    public function getPanier() {
+        return $this->session->get("panier", []);
     }
 
     public function quantite() {
@@ -47,7 +80,7 @@ class Panier {
         $panier = $this->session->get("panier", []);
 
         $quantite = 0;
-        foreach($panier as $item) {
+        foreach ($panier as $item) {
             $quantite += $item["quantite"];
         }
 
