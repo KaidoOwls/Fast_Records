@@ -1,17 +1,72 @@
 body {
     background-color: skyblue;
 }
-/* CSS pour le footer */
+/* Style du footer */
+
 .footer {
     position: fixed;
-    left: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
-    background-color: #f8f9fa; /* Choisissez votre couleur de fond */
-    color: #6c757d; /* Choisissez votre couleur de texte */
+    height: 100px;
+    background-color: #f5f5f5;
+    color: #333;
     text-align: center;
-    padding: 20px 0; /* Ajoutez un espacement intérieur pour le contenu du footer */
 }
 
+.footer .container {
+    width: 100%;
+    max-width: 1140px;
+    padding: 0 20px;
+}
 
+.footer .social-media {
+    margin-bottom: 20px;
+}
 
+.footer .social-media a {
+    margin-right: 10px;
+    color: #333;
+    font-size: 18px;
+}
+
+.footer .social-media a:hover {
+    color: #000;
+}
+
+.footer .links {
+    margin-bottom: 20px;
+}
+
+.footer .links h6 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer .links a {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.footer .links a:hover {
+    color: #000;
+}
+
+.footer .copyright {
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.footer .copyright p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/*!* Styles supplémentaires *!*/
+
+/*.main-content {*/
+/*    min-height: calc(100vh - 100*/
+/*}*/

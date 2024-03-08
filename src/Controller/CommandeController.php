@@ -40,7 +40,7 @@ class CommandeController extends AbstractController
 
         // Envoi d'un e-mail de confirmation
         $email = (new Email())
-            ->from('votre@email.com')
+            ->from('Fastrecords@gmail.com')
             ->to($this->getUser()->getEmail())
             ->subject('Confirmation de commande')
             ->html($this->renderView('commande/email_confirmation.html.twig', [

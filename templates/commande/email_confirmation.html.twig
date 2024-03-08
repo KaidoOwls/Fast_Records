@@ -1,0 +1,40 @@
+
+
+{% block body %}
+
+    <h1>Confirmation de commande</h1>
+
+
+
+    {% set utilisateur = app.user %}
+
+    <p>Bonjour {{ utilisateur.getNom() }},</p>
+    <p>Nous vous confirmons votre commande n°{{ commande.getId() }}</p>
+
+    <p>Votre commande a été passée le {{ commande.getDateCommande()|date('d/m/Y') }}</p>
+
+    <p>Le montant total de votre commande est de {{ commande.getMontantTotal() }} €.</p>
+
+    <p>Voici le détail de votre commande :</p>
+
+{#    {% for produit in panier %}#}
+{#        <li class="list-group-item">#}
+{#            {{ produit.libelle }} - Quantité: {{ produit.quantite }}#}
+{#            <span class="badge badge-success badge-pill">{{ produit.prix }} €</span>#}
+{#        </li>#}
+{#    {% endfor %}#}
+
+
+    <p>Votre commande sera expédiée à l'adresse suivante :</p>
+
+{#    {% if commande.getUtilisateur() is not null %}#}
+{#        <p>{{ commande.getUtilisateur().getAdresseLivraison() ? commande.getUtilisateur().getAdresseLivraison() : commande.getUtilisateur().getAdresse() }}</p>#}
+{#    {% else %}#}
+{#        <p>Adresse de livraison inconnue</p>#}
+{#    {% endif %}#}
+
+    <p>Cordialement,</p>
+
+    <p>L'équipe de Fast records</p>
+
+{% endblock %}
